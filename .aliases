@@ -1,0 +1,34 @@
+alias zshrc="vi ~/.zshrc && source ~/.zshrc"
+alias aliases="vi ~/.aliases && source ~/.aliases"
+
+# git aliases
+alias letsgo="git checkout main && git pull --rebase --ff-only"
+alias gd="git diff"
+alias gl="npm run lint:fix"
+alias gs="git status"
+alias gcam="git commit -am"
+alias gco="git checkout"
+alias gm="git checkout main"
+alias gb="git branch"
+alias gaa="git add -A"
+alias gca="git commit --amend"
+alias grm="git fetch origin main && git rebase main"
+alias gpr="git push -u origin HEAD"
+gcob () {
+  CURRENT_BRANCH="`git branch --show-current`"
+  git checkout -b "belguawhale-$1"
+  # gt track "belguawhale-$1" -p "$CURRENT_BRANCH"
+}
+# alias refreshprs="gt sync && gt submit -u"
+alias deletebranchesprompt="git branch | grep -v 'master' | grep -v 'main' | grep -v '*' | xargs -n 1 -p git branch -D"
+alias clearmergedbranches="git branch | grep -v 'master' | grep -v 'main' | grep -v '*' | xargs -n 1 git branch -d"
+
+# fun
+alias weather="while true; do curl wttr.in/\?m; sleep 3600; done"
+alias weather2="while true; do curl v2.wttr.in/\?m; sleep 3600; done"
+alias sll="while [ true ]; do sl -c; done"
+export GTI_SPEED=100
+alias gtii="while true; do gti -v; done"
+function bell () { printf '\x07'; }
+function bells () { for i in {1..5}; do bell; sleep 0.1; done; }
+alias telehack="nc -c telehack.com 23"
