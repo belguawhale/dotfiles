@@ -1,8 +1,11 @@
 alias zshrc="vi ~/.zshrc && source ~/.zshrc"
 alias aliases="vi ~/.aliases && source ~/.aliases"
 
+# dev environment
+alias cdroot='cd $(git rev-parse --show-toplevel 2>/dev/null || echo ~/project)'
+
 # git aliases
-alias letsgo="git checkout main && git pull --rebase --ff-only"
+alias gu="gt sync"
 alias gd="git diff"
 alias gl="npm run lint:fix"
 alias gs="git status"
@@ -22,6 +25,19 @@ gcob () {
 # alias refreshprs="gt sync && gt submit -u"
 alias deletebranchesprompt="git branch | grep -v 'master' | grep -v 'main' | grep -v '*' | xargs -n 1 -p git branch -D"
 alias clearmergedbranches="git branch | grep -v 'master' | grep -v 'main' | grep -v '*' | xargs -n 1 git branch -d"
+alias update="cdroot && npm run install:all && npm run codegen"
+alias letsgo="git checkout main && git pull --rebase --ff-only"
+# alias letsgo="gm && gu && update"
+# alias grm="gu && git rebase main && update"
+# alias gmm="gu && git merge main && update"
+fetch () {
+  git fetch origin "$1"
+  git switch "$1"
+  gt track
+  update
+}
+alias grh="git reset --hard"
+alias gp="git reset HEAD~"
 
 # fun
 alias weather="while true; do curl wttr.in/\?m; sleep 3600; done"
